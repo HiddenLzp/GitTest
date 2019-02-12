@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+	span{
+		font-size: larger;
+	}
+</style>
+
+<!-- <script type="text/javascript" th:src="@{/index.js}"></script> -->
+</head>
+<body>
+thymeleag模板引擎----index
+<div>
+	<div>
+		<span>用户姓名：</span>
+		<input th:id = "${user.name}" th:name = "${user.name}" th:value = "${user.name}">
+	</div>
+	<div>
+		<span>用户描述：</span>
+		<input th:value = "${user.desc}">
+	</div>
+	<div>
+		<span>用户生日：</span>
+		<input th:value = "${#dates.format(user.birthday,'yyyy-MM-dd')}">
+	</div>
+</div>
+<hr>
+<hr>
+
+<div th:object="${user}">
+	<div>
+		<span>用户姓名：</span>
+		<input th:id = "*{name}" th:name = "*{name}" th:value = "*{name}">
+	</div>
+	<div>
+		<span>用户描述：</span>
+		<input th:value = "*{desc}">
+	</div>
+	<div>
+		<span>用户生日：</span>
+		<input th:value = "*{#dates.format(birthday,'yyyy-MM-dd')}">
+	</div>
+</div>
+<hr>
+<strong>text与utext:</strong><br>
+text：<span th:text="${user.desc}"></span>
+<br>
+utext：<span th:utext="${user.desc}"></span>
+<br>
+URL:<br>
+<a th:href="@{http://www.baidu.com}">网站地址</a>
+<br>
+Form
+
+<form th:action="@{/th/postform}" th:object="${user}" method="post" th:method="post">
+	<input type="text" th:field="*{name}" />
+	<input type="submit" value="提交">
+</form>
+<br>
+if:
+<br>
+<div th:if="${user.age} == 18">等于18</div>
+<div th:if="${user.age} gt 18">大于18</div>
+<div th:if="${user.age} lt 18">小于18</div>
+<div th:if="${user.age} ge 18">大于等于18</div>
+<div th:if="${user.age} le 18">小于等于18</div>
+<br>
+<select>
+	<option>选择框</option>
+	<option th:selected="${user.name eq 'HmLzp'}">HmLzp</option>
+	<option th:selected="${user.name eq 'lt'}">lt</option>
+	<option th:selected="${user.name eq 'lk'}">lk</option>
+</select>
+
+<br>
+
+<table>
+	<tr>
+		<th>姓名</th>
+		<th>年龄</th>
+		<th>年龄备注</th>
+		<th>生日</th>
+	</tr>
+	<tr th:each="person:${userList}">
+		<td th:text="${person.name}"></td>
+		<td th:text="${person.age}"></td>
+		<td th:text="${person.age gt 18} ? 你老了:你很年轻">18岁</td>
+		<td th:text="${#dates.format(person.birthday, 'yyyy-MM-dd hh:mm:ss a')}"></td>
+	</tr>
+</table>
+<br>
+
+switch:
+<div th:switch="${user.name}">
+	<p th:case="'HmLzp'">HmLzp管理员</p>
+	<p th:case="#{roles.manager}">普通管理员</p>
+	<p th:case="#{roles.superadmin}">超级管理员</p>
+	<p th:case="*">其他用户</p>
+</div>
+
+
+
+</body>
+</html>
