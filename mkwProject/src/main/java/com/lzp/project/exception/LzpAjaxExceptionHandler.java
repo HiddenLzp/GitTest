@@ -10,6 +10,7 @@ import com.lzp.project.domain.LzpJSONResult;
 //@RestControllerAdvice
 public class LzpAjaxExceptionHandler {
 
+	//Ajax异常处理
 	//@ExceptionHandler(value = Exception.class)
 	public LzpJSONResult defaultErrorHandler(
 			HttpServletRequest req,Exception e

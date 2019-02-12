@@ -14,6 +14,7 @@ public class LzpExceptionHandler {
 
 	public static final String LZP_ERROR_VIEW = "error";
 	
+	//普通异常处理
 	//@ExceptionHandler(value= Exception.class)
 //	public Object errorHandler(HttpServletRequest request,
 //			HttpServletResponse response,Exception e){
@@ -25,6 +26,7 @@ public class LzpExceptionHandler {
 //		mav.setViewName(LZP_ERROR_VIEW);
 //		return mav;
 //	}
+	//普通异常+Ajax异常统一处理
 	@ExceptionHandler(value= Exception.class)
 	public Object errorHandler(HttpServletRequest request,
 			HttpServletResponse response, Exception e) {
